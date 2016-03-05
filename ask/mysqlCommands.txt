@@ -1,0 +1,4 @@
+CREATE DATABASE box_django;
+CREATE USER 'nick'@'localhost' IDENTIFIED BY 'nick';
+GRANT ALL PRIVILEGES ON box_django.* TO 'nick'@'localhost';
+FLUSH PRIVILEGES;
