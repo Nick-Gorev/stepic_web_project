@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'box_django',
-        'USER': 'nick',
-        #'USER': 'root',
+        #'USER': 'nick',
+        'USER': 'root',
     }
 }
 
