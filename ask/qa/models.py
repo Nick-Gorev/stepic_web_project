@@ -18,7 +18,9 @@ class Question(models.Model):
     #автор вопроса
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     #список пользователей, поставивших "лайк"
-    likes = models.ManyToManyField(User)
+    likes = models.ManyToManyField(User, related_name = '+')
+    def __unicode__(self):
+        return self.title
 
 # ответ
 class Answer(models.Model):
@@ -30,4 +32,6 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     #автор ответа
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    def __unicode__(self):
+        return self.text
 

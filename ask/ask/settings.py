@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'qa',
 ]
 
 #MIDDLEWARE_CLASSES = [
@@ -52,10 +53,11 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = 'ask.urls'
 
+SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(SETTINGS_PATH, '/templates/qa'), os.path.join(SETTINGS_PATH, '/templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'box_django',
-        #'USER': 'nick',
-        'USER': 'root',
+        'USER': 'nick',
+        #'USER': 'root',
     }
 }
 
