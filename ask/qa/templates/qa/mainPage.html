@@ -6,6 +6,8 @@
     <h1>Последние вопросы</h1>
     {% for q in questions %}
         <p><a href="question/{{q.id}}/">{{q.title}}</a></p>
+        <p>Создано {{q.added_at}}</p>
+        
     {% endfor %}
     <nav><ul class="pagination">  
     {% for p in paginator.page_range %}  

@@ -12,7 +12,7 @@ class Question(models.Model):
     # полный текст вопроса
     text = models.TextField()
     # дата добавления вопроса
-    added_at = models.DateTimeField(blank=True)
+    added_at = models.DateTimeField(blank=True, null=True)
     #рейтинг вопроса (число)
     rating = models.IntegerField(default = 0)
     #автор вопроса
@@ -27,7 +27,7 @@ class Answer(models.Model):
     # текст ответа
     text = models.TextField()
     # дата добавления ответа
-    added_at = models.DateTimeField(blank=True)
+    added_at = models.DateTimeField(blank=True, null=True)
     # вопрос, к которому относится ответ
     question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     #автор ответа
