@@ -16,7 +16,7 @@ def mainPage(request):
     except ValueError:
         raise Http404
     limit = 10
-    questions = Question.objects.order_by('-added_at')
+    questions = Question.objects.order_by('-id')
     paginator = Paginator(questions, limit)
     paginator.baseurl = '/?page='
     try:

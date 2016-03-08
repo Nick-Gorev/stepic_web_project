@@ -1,8 +1,6 @@
-# sudo rm /etc/nginx/sites-enabled/default
-
-#sudo ln -sf /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
-#sudo /etc/init.d/gunicorn restart
-gunicorn -b 0.0.0.0:8000 ask.wsgi:application -D
+if [ -e /etc/nginx/sites-enabled/default ] ; then
+    sudo rm /etc/nginx/sites-enabled/default
+fi
 
 sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 sudo /etc/init.d/nginx restart
