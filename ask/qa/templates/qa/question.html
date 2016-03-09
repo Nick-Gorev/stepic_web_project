@@ -3,6 +3,7 @@
     {{ block.super }} – вопрос с ответами
 {% endblock %}
 {% block content %}
+    {% csrf_token %}
     <h2>{{question.title}}</h2>
     <p>{{question.text}}</p>
     <h2>Ответы экспертов</h2>
