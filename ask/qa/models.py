@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -21,6 +22,8 @@ class Question(models.Model):
     likes = models.ManyToManyField(User, related_name = '+')
     def __unicode__(self):
         return self.title
+    def get_url(self):
+        return '/question/%d/' % self.pk        
 
 # ответ
 class Answer(models.Model):
@@ -34,4 +37,6 @@ class Answer(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):
         return self.text
+    def get_url(self):
+        return '/question/%d/' % self.question.pk        
 

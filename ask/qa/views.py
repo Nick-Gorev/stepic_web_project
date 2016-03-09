@@ -2,10 +2,45 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.http import Http404
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from models import Question, Answer
+from forms import AskForm, AnswerForm
 from django.core.paginator import Paginator, EmptyPage
+from django.contrib.auth.decorators import login_required
+
+#@login_required
+def question_add(request):
+    if request.method == "POST":
+        #form = AskForm(request.user, request.POST)
+        form = AskForm(request.POST)
+        if form.is_valid(): 
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'qa/question_add.html', {
+        'form': form
+    })        
+
+#@login_required
+def answer_add(request):
+    if request.method == "POST":
+        #form = AnswerForm(request.user, request.POST)
+        form = AnswerForm(request.POST)
+        if form.is_valid(): 
+            answer = form.save()
+            url = answer.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm()
+    return render(request, 'qa/answer_add.html', {
+        'form': form
+    })     
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK', status=200)
