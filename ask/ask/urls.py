@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from qa.views import test, mainPage, popular, question, question_add, answer_add
+from qa.views import test, mainPage, popular, question, question_add, answer_add, signup, login
 
 urlpatterns = [
     url(r'^$', mainPage, name = 'mainPage'),
@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^question/(?P<slug>\w+)/$', question, name='question'),
     url(r'^ask/', question_add, name = 'ask'),
     url(r'^answer/', answer_add, name = 'ask'),
+    url(r'^signup/', signup, name = 'signup'),
+    url(r'^login/', login, name = 'login'),
     #url(r'^admin/', admin.site.urls),
-    #url(r'^login/', test, name = 'login'),
-    #url(r'^signup/', test, name = 'signup'),
     #url(r'^new/', test, name = 'new'),
 ]

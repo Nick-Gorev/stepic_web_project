@@ -8,15 +8,45 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from models import Question, Answer
-from forms import AskForm, AnswerForm
+from forms import AskForm, AnswerForm, SignupForm, LoginForm
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+
+def login(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid(): 
+            user = form.save()
+            auth_login(request, user)
+            return HttpResponseRedirect("/")
+    else:
+        form = LoginForm()
+    return render(request, 'qa/login.html', {
+        'form': form
+    })   
+
+def signup(request):
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid(): 
+            user = form.save()
+            auth_login(request, user)
+            return HttpResponseRedirect("/")
+    else:
+        form = SignupForm()
+    return render(request, 'qa/signup.html', {
+        'form': form
+    })   
+
 
 #@login_required
 def question_add(request):
     if request.method == "POST":
-        #form = AskForm(request.user, request.POST)
         form = AskForm(request.POST)
+        form._user = request.user
         if form.is_valid(): 
             question = form.save()
             url = question.get_url()
@@ -30,8 +60,8 @@ def question_add(request):
 #@login_required
 def answer_add(request):
     if request.method == "POST":
-        #form = AnswerForm(request.user, request.POST)
         form = AnswerForm(request.POST)
+        form._user = request.user
         if form.is_valid(): 
             answer = form.save()
             url = answer.get_url()
