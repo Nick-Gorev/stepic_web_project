@@ -27,13 +27,13 @@ class SignupForm(forms.Form):
     email = forms.EmailField(max_length=255) 
     # пароль пользователя
     password = forms.CharField(max_length=255)
-    def clean_username(self):
+    def clean(self):
         username = self.cleaned_data['username'];
         if User.objects.filter(username=username).exists():        
-            raise forms.ValidationError(
-                'User ' + username + ' aready exist.')    
+            raise forms.ValidationError('User ' + username + ' aready exist.')    
     def save(self):
         user = User.objects.create_user(self.cleaned_data['username'], self.cleaned_data['email'], self.cleaned_data['password'])
+        user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         return user
 
 # форма добавления вопроса
