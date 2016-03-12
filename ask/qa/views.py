@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
+
 
 def login(request):
     if request.method == "POST":
@@ -33,6 +35,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid(): 
             user = form.save()
+            user = authenticate(user.username, user.password)
             auth_login(request, user)
             return HttpResponseRedirect("/")
     else:
