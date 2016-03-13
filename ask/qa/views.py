@@ -35,7 +35,6 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid(): 
             user = form.save()
-            user = authenticate(user.username, user.password)
             auth_login(request, user)
             return HttpResponseRedirect("/")
     else:
@@ -87,6 +86,7 @@ def mainPage(request):
     questions = Question.objects.order_by('-id')
     paginator = Paginator(questions, limit)
     paginator.baseurl = '/?page='
+    username = request.user.username
     try:
         page = paginator.page(page)
     except EmptyPage:
@@ -94,6 +94,7 @@ def mainPage(request):
     return render(request, 'qa/mainPage.html', {
         'questions': page,
         'paginator': paginator, 'page': page,
+        'username': username,
     })
 
 def popular(request):

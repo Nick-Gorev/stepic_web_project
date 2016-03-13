@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="/static/qa/bootstrap.min.css">
 </head>
 <body>
-    <h1>Спроси у Пупкина!</h1>
+    <div>
+        <span><h1>Спроси у Пупкина!</h1>
+        <p>Пользователь:{% block user %}{% endblock %}</p>
+        </span>
+    </div>
     {% block content %}{% endblock %}
 </body>
 </html>

@@ -2,10 +2,13 @@
 {% block title %}
     {{ block.super }} – главная
 {% endblock %}
+{% block user %}
+{{ username }}
+{% endblock %} 
 {% block content %}
     <h1>Последние вопросы</h1>
     {% for q in questions %}
-        <p><a href="question/{{q.id}}/">{{q.title}}</a></p>
+        <p>{{q.author}}:<a href="question/{{q.id}}/">{{q.title}}</a></p>
     {% endfor %}
     <nav><ul class="pagination">  
     {% for p in paginator.page_range %}  
