@@ -11,10 +11,10 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=255, required=False) 
     # пароль пользователя
     password = forms.CharField(widget=forms.PasswordInput, required=False)
-    def clean(self):
-        user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
-        if user is None:
-            raise forms.ValidationError('Invalid login')    
+    #def clean(self):
+    #    user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+    #    if user is None:
+    #        raise forms.ValidationError('Invalid login')    
     def save(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         return user
