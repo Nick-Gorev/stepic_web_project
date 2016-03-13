@@ -22,7 +22,8 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid(): 
             user = form.save()
-            auth_login(request, user)
+            if user is not None:
+                auth_login(request, user)
             return HttpResponseRedirect("/")
     else:
         form = LoginForm()
@@ -35,7 +36,8 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid(): 
             user = form.save()
-            auth_login(request, user)
+            if user is not None:
+                auth_login(request, user)
             return HttpResponseRedirect("/")
     else:
         form = SignupForm()
