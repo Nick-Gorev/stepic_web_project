@@ -24,7 +24,7 @@ def login(request):
             user = form.save()
             if user is not None:
                 auth_login(request, user)
-            return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/")
     else:
         form = LoginForm()
     return render(request, 'qa/login.html', {

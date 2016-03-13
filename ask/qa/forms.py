@@ -8,9 +8,9 @@ from django.contrib.auth import authenticate
 # Форма входа существующего пользователя
 class LoginForm(forms.Form):
     # имя пользователя, логин
-    username = forms.CharField(max_length=255) 
+    username = forms.CharField(max_length=255, required=False) 
     # пароль пользователя
-    password = forms.CharField(max_length=255)
+    password = forms.CharField(widget=forms.PasswordInput, required=False)
     def clean(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         if user is None:
